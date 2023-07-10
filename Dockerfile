@@ -66,8 +66,6 @@ RUN cd /tmp && \
                        --no-backup \
                        --no-check-for-alternate-installs \
                        --no-libglx-indirect \
-                       --no-glvnd-egl-client \
-                       --no-glvnd-glx-client \
                        --no-install-libglvnd && \
     mkdir -p /usr/src/nvidia-$DRIVER_VERSION && \
     mv LICENSE mkprecompiled kernel /usr/src/nvidia-$DRIVER_VERSION && \
@@ -120,10 +118,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # novnc
 # download websockify as well
-RUN wget https://github.com/novnc/noVNC/archive/v1.1.0.zip && \
-  unzip -q v1.1.0.zip && \
-  rm -rf v1.1.0.zip && \
-  git clone https://github.com/novnc/websockify /noVNC-1.1.0/utils/websockify
+ENV NOVNC_VERSION=1.4.0
+RUN wget https://github.com/novnc/noVNC/archive/v$NOVNC_VERSION.zip && \
+  unzip -q v$NOVNC_VERSION.zip && \
+  rm -rf v$NOVNC_VERSION.zip && \
+  git clone https://github.com/novnc/websockify /noVNC-$NOVNC_VERSION/utils/websockify
 
 # Xorg segfault error
 # dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /var/run/dbus/system_bus_socket: No such file or directory)

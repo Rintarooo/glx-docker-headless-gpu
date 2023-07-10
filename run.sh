@@ -20,7 +20,7 @@ sleep 2  # wait for the server gets ready
 # sleep 2
 
 # 3. start noVNC
-/noVNC-1.1.0/utils/launch.sh --vnc localhost:5900 --listen 8081 &
+/noVNC-1.4.0/utils/launch.sh --vnc localhost:5900 --listen 8081 &
 sleep 2
 
 echo 'running noVNC at http://localhost:8081/vnc.html?host=localhost&port=8081'
