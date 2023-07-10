@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 
 # Make all NVIDIA GPUS visible, but I want to manually install drivers
 ARG NVIDIA_VISIBLE_DEVICES=all
@@ -44,17 +44,17 @@ RUN dpkg --add-architecture i386 && \
 # if you need full ubuntu desktop environment, the line below should be added.
         # ubuntu-desktop \
 RUN apt-get update && apt-get install -y \
-        xinit && \
+        xinit \
+        ubuntu-desktop && \
     rm -rf /var/lib/apt/lists/*
 
 # (1-3) Install NVIDIA drivers, including X graphic drivers
 # Same command as nvidia/driver, except --x-{prefix,module-path,library-path,sysconfig-path} are omitted in order to make use default path and enable X drivers.
 # Driver version must be equal to host's driver
 # Install the userspace components and copy the kernel module sources.
-ENV DRIVER_VERSION=410.129-diagnostic
-ENV DRIVER_VERSION_PATH=410.129
+ENV DRIVER_VERSION=515.105.01
 RUN cd /tmp && \
-    curl -fSsl -O https://us.download.nvidia.com/tesla/$DRIVER_VERSION_PATH/NVIDIA-Linux-x86_64-$DRIVER_VERSION.run && \
+    curl -fSsl -O https://us.download.nvidia.com/tesla/$DRIVER_VERSION/NVIDIA-Linux-x86_64-$DRIVER_VERSION.run && \
     sh NVIDIA-Linux-x86_64-$DRIVER_VERSION.run -x && \
     cd NVIDIA-Linux-x86_64-$DRIVER_VERSION && \
     ./nvidia-installer --silent \
