@@ -71,14 +71,21 @@ sshログインして`nvidia-smi`を実行して、GPUが検出されること�
 X11サーバーとアプリケーションの入ったdocker containerをビルド、立ち上げる。
 
 ```
-nvidia-docker build -t x11-GL-docker .
+# nvidia-smiでGCPのVMインスタンスのnvidiaドライバーのバージョンを確認し、インストールするDockerfileのドライバーのバージョンを変更する。
+
+# ビルド
+nvidia-docker build -t x11gl .
+
+# コンテナ起動
 docker run --runtime=nvidia --privileged -it --rm \
-  -p 5900:5900 \  # or --net=host
+  -p 5900:5900 \
   -e BUSID=PCI:0:4:0 \
-  -e SCREEN_RESOLUTION=1280x1024 \
+  -e RESOLUTION=1280x1024 \
   -e VNC_PASSWORD=passpass \
   -v /home/ryonakabayashi/x11-docker/lgsvlsimulator-linux64-2019.05:/lg \
-  --name x11-GL-docker x11-GL-docker
+  --name x11gl x11gl
+  <!-- -p 5900:5900 \  # or --net=host -->
+  <!-- -e SCREEN_RESOLUTION=1280x1024 \ -->
 ```
 
 run.shがdocker内で実行される。

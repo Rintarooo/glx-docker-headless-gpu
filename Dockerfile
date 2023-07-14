@@ -52,7 +52,7 @@ RUN apt-get update && apt-get install -y \
 # Same command as nvidia/driver, except --x-{prefix,module-path,library-path,sysconfig-path} are omitted in order to make use default path and enable X drivers.
 # Driver version must be equal to host's driver
 # Install the userspace components and copy the kernel module sources.
-ENV DRIVER_VERSION=515.105.01
+ENV DRIVER_VERSION=525.105.17
 RUN cd /tmp && \
     curl -fSsl -O https://us.download.nvidia.com/tesla/$DRIVER_VERSION/NVIDIA-Linux-x86_64-$DRIVER_VERSION.run && \
     sh NVIDIA-Linux-x86_64-$DRIVER_VERSION.run -x && \

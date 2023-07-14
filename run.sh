@@ -20,10 +20,15 @@ sleep 2  # wait for the server gets ready
 # sleep 2
 
 # 3. start noVNC
-/noVNC-1.4.0/utils/novnc_proxy --vnc localhost:5900 --listen localhost:8081 &
+# https://github.com/novnc/noVNC
+/noVNC-1.4.0/utils/novnc_proxy --vnc localhost:5900 --listen 8081 &
 sleep 2
 
 echo 'running noVNC at http://localhost:8081/vnc.html?host=localhost&port=8081'
+# echo 'ssh -i "$KEYFILE" -L 5900:localhost:5900 $USERNAME@$GCP_PUBLIC_IP -N &'
+# echo 'run the following command on your MacOS, ssh -i "~/.ssh/google_compute_engine" -L 8081:localhost:8081 $USER@34.84.237.195 -N'
+# echo 'run the following command on your MacOS, ssh -i "~/.ssh/google_compute_engine" -L 5900:localhost:5900 $USER@34.84.237.195 -N'
+# http://localhost:8081/vnc.html
 
 # 3. start simulator
 export DISPLAY=:0
